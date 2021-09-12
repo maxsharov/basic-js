@@ -14,7 +14,19 @@ import { NotImplementedError } from '../extensions/index.js';
  * For 00-1B-63-84-45-E6, the output should be true.
  *
  */
-export default function isMAC48Address(/* n */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function isMAC48Address(n) {
+  let validMac = true
+  const macParts = n.split('-')
+
+  if (macParts.length !== 6) return false
+
+  for (let part of macParts) {
+    part.split('').forEach(val => {
+      if (isNaN(Number.parseInt(val, 16))) {
+        validMac = false
+      }
+    })
+  }
+
+  return validMac
 }

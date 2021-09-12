@@ -16,21 +16,16 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function renameFiles(names) {
-  const newNames = names.reduce((acc,value) => {
-    
-    if (!acc.includes(value)) {
-      // [] does not have such names
-      acc.push(value)
+  const newNames = names.reduce((acc, fileName) => {  
+    if (!acc.includes(fileName)) {
+      acc.push(fileName)
     } else {
-      // [] has such names
-      
-      // const existingName = acc.find(value)
-
-      // if (!existingName.slice(value.length).includes('(')) {
-      //   acc.push(value + '(0)')
-      // } else {
-
-      // }
+      let i = 1
+      let newFileName = fileName + `(${i})`
+      while(acc.includes(newFileName)) {
+        newFileName = fileName + `(${++i})`
+      }
+      acc.push(newFileName)
     }
 
     return acc
