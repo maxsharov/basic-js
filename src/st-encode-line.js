@@ -10,7 +10,30 @@ import { NotImplementedError } from '../extensions/index.js';
  * For aabbbc should return 2a3bc
  *
  */
-export default function encodeLine(/* str */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function encodeLine(str) {
+  let currentLetter = str.charAt(0)
+
+  let newString = ''
+
+  let i = 0
+
+  for (let char of str.split('')) {
+    if (char !== currentLetter) {
+      newString += (i > 1 ? i : '') + currentLetter
+      i = 1
+      currentLetter = char
+    } else {
+      i++
+    }
+  }
+
+  if (i) {
+    newString += (i > 1 ? i : '') + currentLetter
+  }
+
+  return newString
+
 }
+
+
+// npm run test -- test/transform-array.test.js
